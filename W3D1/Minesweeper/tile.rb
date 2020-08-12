@@ -9,8 +9,23 @@ class Tile
     end
 
     def reveal
-        @face = true
+        if !@status
+            @face = true
+            #reveal_neighboring tiles
+        else
+            #game_over
+        end
+
     end
+
+    def recursive_neighbors_reveal(neighboring_tiles)
+        return if neighboring_tiles.any? { |tile| tile.status }
+        neighboring_tiles.each do |tile|
+            tile.face = true
+            recursive_neighbors_reveal(tile.neighbors)
+        end
+    end
+
 
     def neighbors
         grid = @board.grid
@@ -18,6 +33,17 @@ class Tile
         pos = self.get_pos
         row_index = pos[0]
         item_index = pos[1]
+        ((row_index - 1)..(row_index + 1)).each do |i|
+            ((item_index - 1)..(item_index + 1)).each do |x|
+                neighbor_tiles << grid[i][x]
+            end
+        end
+        neighbor_tiles
+    end
+
+    def inspect
+        "#{self.object_id} face: #{self.face} status: #{self.status}"
+    end
         
         # neighbor_tiles << @board.grid[row_index, item_index - 1]
         # neighbor_tiles << @board.grid[row_index, item_index + 1]
@@ -27,7 +53,7 @@ class Tile
 
 
 
-    end
+    
 
     def get_pos
         pos = []

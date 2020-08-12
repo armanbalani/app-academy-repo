@@ -1,4 +1,5 @@
 require_relative("./tile.rb")
+require 'byebug'
 
 class Board
 
@@ -12,6 +13,9 @@ class Board
         until @grid.length == 81
             @grid << Tile.new(self)
         end
+
+        
+
 
         until @grid.count { |tile| tile.status == true } == 10
             index = rand(0..80)
@@ -43,4 +47,17 @@ end
 
 board = Board.new
 board.populate
-p board.grid[5][0].get_pos
+board.grid.each do |row|
+    p row
+end
+puts
+puts 
+p board.grid[1][1].neighbors
+# p board.grid
+# # board.grid.each do |row|
+# #     row.map! do |tile|
+# #         tile.inspect
+# #     end
+# #     p row
+# # end
+# # board.grid
