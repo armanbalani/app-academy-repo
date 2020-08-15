@@ -14,9 +14,6 @@ class Board
             @grid << Tile.new(self)
         end
 
-        
-
-
         until @grid.count { |tile| tile.status == true } == 9
             index = rand(0..80)
             tile = @grid[index]
@@ -24,6 +21,17 @@ class Board
         end
 
         @grid = @grid.each_slice(9).to_a.transpose
+
+        @grid.each do |row|
+            row.each do |tile|
+                tile.update_proximity
+            end
+        end
+    end
+
+    def[](pos)
+        row, col = pos
+        @grid[row][col]
     end
 
     def display_grid
@@ -35,7 +43,7 @@ class Board
             sub.each do |tile|
                 if !tile.status && tile.face
                     print "#{tile.proximity} "  
-                elsif tile.status
+                elsif tile.status && tile.face
                     print "B "
                 else
                     print "  "
@@ -59,8 +67,7 @@ board.grid.each do |row|
 end
 board.display_grid
 # debugger
-board.grid[2][2].recursive_neighbors_reveal
-board.display_grid
+p board[[2, 2]]
 # board.grid.each do |row|
 #     p row
 # end

@@ -10,18 +10,12 @@ class Tile
     end
 
     def reveal
-        if !@status
-            @face = true
-            #reveal_neighboring tiles
-        else
-            #game_over
-        end
-
+        @face = true
     end
 
     def recursive_neighbors_reveal
-        return if self.proximity > 0
         self.face = true
+        return if self.proximity > 0
         neighboring_tiles = self.get_neighbors
         neighboring_tiles.each do |tile|
             tile.recursive_neighbors_reveal unless tile.face
