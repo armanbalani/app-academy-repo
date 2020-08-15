@@ -19,7 +19,6 @@ class Game
         @game_board.display_grid
         puts "Enter the position you would like to reveal. Or if you'd like to flag a position type the word 'flag'"
         input = gets.chomp
-        tile_at_pos = 
         if input == "flag"
             puts "Enter the position you would like to flag"
             flag_input = gets.chomp
