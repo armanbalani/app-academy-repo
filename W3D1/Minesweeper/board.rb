@@ -45,6 +45,8 @@ class Board
                     print "#{tile.proximity} "  
                 elsif tile.status && tile.face
                     print "B "
+                elsif tile.flagged
+                    print "F "
                 else
                     print "  "
                 end

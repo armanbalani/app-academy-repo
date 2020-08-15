@@ -1,16 +1,21 @@
 class Tile
 
-    attr_accessor :status, :value, :face, :proximity
+    attr_accessor :status, :value, :face, :proximity, :flagged
 
     def initialize(board)
         @status = false
         @face = false
         @board = board
         @proximity = 0
+        @flagged = false
     end
 
     def reveal
         @face = true
+    end
+
+    def flag
+        @flagged = true
     end
 
     def recursive_neighbors_reveal
