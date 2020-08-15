@@ -55,23 +55,23 @@ class Board
 
 end
 
-board = Board.new
-board.populate
-board.grid
+# board = Board.new
+# board.populate
+# board.grid
 
-# board.display_grid
-board.grid.each do |row| 
-    row.each do |tile|
-        tile.update_proximity
-    end
-end
-board.display_grid
-# debugger
-p board[[2, 2]]
-# board.grid.each do |row|
-#     p row
+# # board.display_grid
+# board.grid.each do |row| 
+#     row.each do |tile|
+#         tile.update_proximity
+#     end
 # end
 # board.display_grid
+# # debugger
+# p board[[2, 2]]
+# # board.grid.each do |row|
+# #     p row
+# # end
+# # board.display_grid
 
 
 

@@ -22,7 +22,6 @@ class Game
         tile_at_pos = @game_board[pos]
         if !tile_at_pos.status
             tile_at_pos.recursive_neighbors_reveal
-            @game_board.display_grid
         else
             tile_at_pos.reveal
             @game_board.display_grid
