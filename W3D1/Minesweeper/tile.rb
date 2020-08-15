@@ -1,11 +1,12 @@
 class Tile
 
-    attr_accessor :status, :value, :face
+    attr_accessor :status, :value, :face, :proximity
 
     def initialize(board)
         @status = false
         @face = false
         @board = board
+        @proximity = 0
     end
 
     def reveal
@@ -18,16 +19,24 @@ class Tile
 
     end
 
-    def recursive_neighbors_reveal(neighboring_tiles)
-        return if neighboring_tiles.any? { |tile| tile.status }
+    def recursive_neighbors_reveal
+        return if self.proximity > 0
+        self.face = true
+        neighboring_tiles = self.get_neighbors
         neighboring_tiles.each do |tile|
+            tile.recursive_neighbors_reveal unless tile.face
             tile.face = true
-            recursive_neighbors_reveal(tile.neighbors)
         end
     end
 
+    def update_proximity
+        neighbors = self.get_neighbors
+        count = neighbors.count { |tile| tile.status }
+        self.proximity += count
+    end
 
-    def neighbors
+
+    def get_neighbors
         grid = @board.grid
         neighbor_tiles = []
         pos = self.get_pos
@@ -35,14 +44,17 @@ class Tile
         item_index = pos[1]
         ((row_index - 1)..(row_index + 1)).each do |i|
             ((item_index - 1)..(item_index + 1)).each do |x|
-                neighbor_tiles << grid[i][x]
+                unless i > 8 || x > 8 || i < 0 || x < 0
+                    neighbor = grid[i][x]
+                    neighbor_tiles << neighbor unless neighbor.face
+                end
             end
         end
         neighbor_tiles
     end
 
     def inspect
-        "#{self.object_id} face: #{self.face} status: #{self.status}"
+        "#{self.object_id} face: #{self.face} status: #{self.status} prox: #{self.proximity}"
     end
         
         # neighbor_tiles << @board.grid[row_index, item_index - 1]
@@ -52,8 +64,6 @@ class Tile
         # neighbor_tiles << @board.grid[row_index - 1, item_index + 1]
 
 
-
-    
 
     def get_pos
         pos = []

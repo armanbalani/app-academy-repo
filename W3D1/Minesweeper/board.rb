@@ -17,7 +17,7 @@ class Board
         
 
 
-        until @grid.count { |tile| tile.status == true } == 10
+        until @grid.count { |tile| tile.status == true } == 9
             index = rand(0..80)
             tile = @grid[index]
             tile.status = true
@@ -33,10 +33,12 @@ class Board
         @grid.each.with_index do |sub, idx|
             print "#{idx} " 
             sub.each do |tile|
-                if tile.face && !tile.status
-                    print "N"
-                elsif tile.face && tile.status
-                    print "B"
+                if !tile.status && tile.face
+                    print "#{tile.proximity} "  
+                elsif tile.status
+                    print "B "
+                else
+                    print "  "
                 end
             end
             puts
@@ -47,12 +49,25 @@ end
 
 board = Board.new
 board.populate
-board.grid.each do |row|
-    p row
+board.grid
+
+# board.display_grid
+board.grid.each do |row| 
+    row.each do |tile|
+        tile.update_proximity
+    end
 end
-puts
-puts 
-p board.grid[1][1].neighbors
+board.display_grid
+# debugger
+board.grid[2][2].recursive_neighbors_reveal
+board.display_grid
+# board.grid.each do |row|
+#     p row
+# end
+# board.display_grid
+
+
+
 # p board.grid
 # # board.grid.each do |row|
 # #     row.map! do |tile|
