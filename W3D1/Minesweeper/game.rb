@@ -17,8 +17,8 @@ class Game
     end
 
     def play_turn
-        @game_board.display_grid
         puts "Enter the position you would like to reveal.\nOr\nType 'flag' to flag a position you think might be a bomb.\nType 'save' to save your current session.\nType 'load' to load a previous session"
+        @game_board.display_grid
         input = gets.chomp
         if input == "flag"
             puts "Enter the position you would like to flag"
@@ -65,9 +65,6 @@ class Game
             @game_board = YAML.load_file("save_data.yml")
         end
     end
-
-
-
 
 end
 

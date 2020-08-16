@@ -1,5 +1,6 @@
 require_relative("./tile.rb")
 require 'byebug'
+require 'colorize'
 
 class Board
 
@@ -42,11 +43,17 @@ class Board
             print "#{idx} " 
             sub.each do |tile|
                 if !tile.status && tile.face
-                    print "#{tile.proximity} "  
+                    if tile.proximity == 0
+                        print "#{tile.proximity} ".colorize(:light_green)
+                    elsif tile.proximity == 1
+                        print "#{tile.proximity} ".colorize(:yellow)
+                    else
+                        print "#{tile.proximity} ".colorize(:light_red)
+                    end   
                 elsif tile.status && tile.face
-                    print "B "
+                    print "B ".colorize(:red)
                 elsif tile.flagged
-                    print "F "
+                    print "F ".colorize(:cyan)
                 else
                     print "  "
                 end
@@ -56,6 +63,8 @@ class Board
     end
 
 end
+
+
 
 # board = Board.new
 # board.populate
