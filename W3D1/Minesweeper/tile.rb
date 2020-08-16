@@ -1,6 +1,6 @@
 class Tile
 
-    attr_accessor :status, :value, :face, :proximity, :flagged
+    attr_accessor :status, :value, :face, :proximity, :flagged, :highlighted
 
     def initialize(board)
         @status = false
@@ -8,10 +8,15 @@ class Tile
         @board = board
         @proximity = 0
         @flagged = false
+        @highlighted = false
     end
 
     def reveal
         @face = true
+    end
+
+    def highlight
+        @highlighted = true
     end
 
     def flag
@@ -53,7 +58,7 @@ class Tile
     end
 
     def inspect
-        "#{self.object_id} face: #{self.face} status: #{self.status} prox: #{self.proximity}"
+        "#{self.object_id} face: #{self.face} status: #{self.status} prox: #{self.proximity} highlight: #{self.highlighted}"
     end
         
         # neighbor_tiles << @board.grid[row_index, item_index - 1]

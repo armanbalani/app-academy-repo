@@ -1,8 +1,11 @@
 require_relative("./board.rb")
 require_relative("./tile.rb")
 require 'yaml'
+require 'remedy'
 
 class Game
+    include Remedy
+
     attr_accessor :game_board
 
     def initialize
@@ -17,21 +20,61 @@ class Game
     end
 
     def play_turn
+        
         puts "Enter the position you would like to reveal.\nOr\nType 'flag' to flag a position you think might be a bomb.\nType 'save' to save your current session.\nType 'load' to load a previous session"
-        @game_board.display_grid
-        input = gets.chomp
-        if input == "flag"
-            puts "Enter the position you would like to flag"
-            flag_input = gets.chomp
-            tile_to_flag = get_tile_at_pos(flag_input)
-            tile_to_flag.flag
-        elsif input == "save"
-            self.save
-            puts "Game saved successfully"
-        elsif input == "load"
-            self.load
-        else 
-            tile_at_pos = get_tile_at_pos(input)
+        row_index = 0
+        column_index = 0
+        selected_pos = [row_index, column_index]
+        key = nil
+        until key == "control_m" 
+            @game_board.display_grid
+            @game_board.clear_highlights
+            user_input = Interaction.new
+            key = user_input.get_key.to_s
+            if key == "up"
+                if row_index == 0 
+                    row_index = 8
+                else
+                    row_index -= 1
+                end
+                highlight_tile(row_index, column_index)
+            elsif key == "down"
+                if row_index == 8
+                    row_index = 0
+                else
+                    row_index += 1
+                end
+                highlight_tile(row_index, column_index)
+            elsif key == "right"
+                if column_index == 8
+                    column_index = 0
+                else
+                    column_index += 1
+                end
+                highlight_tile(row_index, column_index)
+            elsif key == "left"
+                if column_index == 0
+                    column_index = 8
+                else
+                    column_index -= 1
+                end
+                highlight_tile(row_index, column_index)
+            elsif key == "s"
+                self.save
+                puts "Game saved successfully"
+            elsif key == "l"
+                self.load
+            elsif key == "f"
+                puts "enter the position you would like to flag. i.e: '0 4'"
+                pos = gets.chomp.split.map(&:to_i)
+                tile_to_flag = get_tile_at_pos(pos)
+                tile_to_flag.flag
+            elsif key == "q"
+                raise
+            end
+
+        end     
+        tile_at_pos = get_tile_at_pos([row_index, column_index])
             if !tile_at_pos.status
                 tile_at_pos.recursive_neighbors_reveal
             else
@@ -39,20 +82,27 @@ class Game
                 @game_board.display_grid
                 puts "Game over!"
             end   
-        end
 
     end
 
-    def get_tile_at_pos(string)
-        pos = string.split.map(&:to_i)
+    def get_tile_at_pos(pos)
+        # pos = string.split.map(&:to_i)
         @game_board[pos]
     end
 
+    def highlight_tile(row_index, column_index)
+        highlighted_pos = [row_index, column_index]
+        tile_to_be_highlighted = get_tile_at_pos(highlighted_pos)
+        tile_to_be_highlighted.highlight
+    end
+
+    
     def game_over?
         @game_board.grid.any? do |row|
             row.any? { |tile| tile.status && tile.face }
         end
     end
+
 
     def save
         File.open("save_data.yml", "w") do |f|     

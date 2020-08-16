@@ -31,6 +31,20 @@ class Board
         end
     end
 
+    def clear_highlights
+        @grid.each do |row|
+            row.each do |tile|
+                tile.highlighted = false
+            end
+        end
+    end
+
+    def find_highlight
+        @grid.find do |row|
+            return row.find { |tile| tile.highlighted}
+        end
+    end
+
     def[](pos)
         row, col = pos
         @grid[row][col]
@@ -43,7 +57,9 @@ class Board
         @grid.each.with_index do |sub, idx|
             print "#{idx} " 
             sub.each do |tile|
-                if !tile.status && tile.face
+                if tile.highlighted
+                    print "X ".colorize(:blue)
+                elsif !tile.status && tile.face
                     if tile.proximity == 0
                         print "#{tile.proximity} ".colorize(:light_green)
                     elsif tile.proximity == 1
@@ -64,14 +80,15 @@ class Board
     end
 
 end
+# board = Board.new
+# board.populate
+# board[[0,0]].highlight
+# p board.find_highlight
 
-include Remedy
-  joke = Content.new
-  joke << "Q: What's the difference between a duck?"
-  joke << "A: Purple, because ice cream has no bones!"
-
-  screen = Viewport.new
-  screen.draw joke
+# include Remedy
+# user_input = Interaction.new
+# key = user_input.get_key
+# # puts key.to_s
 
 
 
