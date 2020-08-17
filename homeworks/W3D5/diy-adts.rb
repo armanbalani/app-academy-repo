@@ -17,3 +17,22 @@ class Stack
       # returns, but doesn't remove, the top element in the stack
     end
 end
+
+class Queue
+    def initialize
+        @elements = []
+    end
+
+    def enqueue(el)
+        @elements << el
+    end
+
+    def dequeue
+        @elements.shift
+    end
+
+    def peek
+        @elements.first
+    end
+end
+
