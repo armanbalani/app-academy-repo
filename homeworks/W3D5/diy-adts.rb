@@ -36,3 +36,33 @@ class Queue
     end
 end
 
+class Map
+
+    def initialize
+        @pairs = []
+    end
+
+    def set(key, value)
+        keys = @pairs.map { |pair| pair[0] }
+        if keys.include?(key)
+            index = @pairs.index { |pair| pair[0] == key }
+            @pairs[index] = [key, value]
+        else
+            @pairs << [key, value]
+        end
+    end
+
+    def get(key)
+        @pairs.select { |pair| pair[0] == key }
+    end
+
+    def delete(key)
+        @pairs.delete_if { |pair| pair[0] == key }
+    end
+
+    def show
+        @pairs.each { |pair| p pair }
+    end
+
+
+end
