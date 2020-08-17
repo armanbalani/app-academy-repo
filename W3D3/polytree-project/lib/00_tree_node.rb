@@ -16,5 +16,15 @@ class PolyTreeNode
         par.children << self unless par.children.include?(self)
     end
 
+    def add_child(child_node)
+        child_node.parent = self
+    end
+
+    def remove_child(child_node)
+        child_node.parent = nil
+        raise if !self.children.include?(child_node)
+    end
+
+
 
 end
