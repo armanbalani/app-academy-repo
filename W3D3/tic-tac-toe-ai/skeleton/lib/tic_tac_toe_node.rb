@@ -12,14 +12,21 @@ class TicTacToeNode
   end
 
   def losing_node?(evaluator)
-    return true if @board.over? && evaluator != @board.winner
-    return false if @board.over? && (evaluator == @board.winner || board.winner.nil?)
-    if @next_mover_mark == :x
-      self.children.none? { |node| node.losing_node?(evaluator) }
+    return true if @board.over? && evaluator != @board.winner && !board.winner.nil?
+    return false if @board.over? && (evaluator == @board.winner || @board.winner.nil? || @board.tied?)
+    if @next_mover_mark == evaluator
+      self.children.none? do |node| 
+        result = node.losing_node?(evaluator)
+        return result unless result.nil?
+      end
     end
 
-    if @next_mover_mark == :o
-      self.children.any? { |node| node.losing_node?(evaluator) }
+    if @next_mover_mark != evaluator
+      self.children.each do |node|
+        result = node.losing_node?(evaluator)
+        return true if result == true
+      end
+      return false
     end
   end
 
@@ -49,12 +56,21 @@ class TicTacToeNode
 
 end
 
-  hp = HumanPlayer.new("Ned")
-  cp = ComputerPlayer.new
-  game = TicTacToe.new(hp, cp)
-  p game.board.rows
+  # hp = HumanPlayer.new("Ned")
+  # cp = ComputerPlayer.new
+  # game = TicTacToe.new(hp, cp)
+  # p game.board.rows
+      # node = TicTacToeNode.new(Board.new, :o)
+      # node.board[[0, 0]] = :x
+      # node.board[[0, 1]] = :o
+      # node.board[[0, 2]] = :x
+      # node.board[[1, 0]] = :o
+      # node.board[[1, 1]] = :x
+      # node.board[[1, 2]] = :o
+      # node.board[[2, 0]] = :o
+      # node.board[[2, 1]] = :x
+      # p node.board.rows
 
 
-
-  node = TicTacToeNode.new(game.board, "Y")
-  p node.children
+  # node = TicTacToeNode.new(game.board, "Y")
+  # p node.children
