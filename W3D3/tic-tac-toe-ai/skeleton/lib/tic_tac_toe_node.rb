@@ -15,10 +15,11 @@ class TicTacToeNode
     return true if @board.over? && evaluator != @board.winner && !board.winner.nil?
     return false if @board.over? && (evaluator == @board.winner || @board.winner.nil? || @board.tied?)
     if @next_mover_mark == evaluator
-      self.children.none? do |node| 
-        result = node.losing_node?(evaluator)
-        return result unless result.nil?
+      result = self.children.all? do |node|
+        node.losing_node?(evaluator)
+        # return result unless result.nil?
       end
+      return result
     end
 
     if @next_mover_mark != evaluator
@@ -44,8 +45,7 @@ class TicTacToeNode
 
     if @next_mover_mark != evaluator
       self.children.all? do |node|
-        result = node.winning_node?(evaluator)
-        return result unless result.nil?
+        node.winning_node?(evaluator)
       end
     end
   end
@@ -63,7 +63,7 @@ class TicTacToeNode
           new_node = TicTacToeNode.new(@board.dup, node_mark, [r,p])
           new_node.board[[r,p]] = next_mover_mark
           nodes << new_node
-          @prev_move_pos = [r,p]
+          # @prev_move_pos = [r,p]
         end
       end
     end
@@ -72,6 +72,20 @@ class TicTacToeNode
 
 
 end
+
+  test_board = Board.new
+    test_board[[0, 0]] = :x
+    test_board[[2, 0]] = :x
+    test_board[[1, 0]] = :o
+    test_board[[2, 1]] = :o
+      # node.board.rows.each do |row|
+      #   p row
+      # end
+      # debugger
+      # node.losing_node?(:x)
+
+
+
 
   # hp = HumanPlayer.new("Ned")
   # cp = ComputerPlayer.new
