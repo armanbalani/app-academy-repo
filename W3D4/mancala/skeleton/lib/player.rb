@@ -16,4 +16,24 @@ class Player
       start_pos
     end
   end
+
+  def self.all
+    players = []
+    ObjectSpace.each_object Player do |player|
+      players << player
+    end
+    players
+  end
+
+  def self.find(name)
+    players = Player.all
+    players.find do |player|
+      player.name == name
+    end
+  end
+
 end
+
+# player1 = Player.new("ye", 1)
+# player2 = Player.new("tw", 2)
+
