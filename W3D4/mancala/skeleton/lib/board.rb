@@ -3,9 +3,11 @@ require 'byebug'
 
 
 class Board
-  attr_accessor :cups
+  attr_accessor :cups, :name1, :name2
 
   def initialize(name1, name2)
+    @name2 = name2
+    @name1 = name1
     @cups = []
     14.times do 
       cup = []
@@ -50,7 +52,7 @@ class Board
         @cups[i % 14] << :stone
       end
     end
-    # render
+    render
     next_turn(end_pos, start_pos)
 
   end
@@ -74,8 +76,6 @@ class Board
     else
       end_index
     end
-
-
   end
 
   def render
@@ -87,9 +87,14 @@ class Board
   end
 
   def one_side_empty?
+    return true if (0..5).all? { |i| @cups[i].empty? } || (7..12).all? { |i| @cups[i].empty? }
+    return false
   end
 
   def winner
+    return :draw if @cups[13] == @cups[6]
+    return @name1 if @cups[6].length > @cups[13].length 
+    return @name2
   end
 end
 
