@@ -22,9 +22,18 @@ end
 def feed_me_a_fruit
   puts "Hello, I am a friendly monster. :)"
 
-  puts "Feed me a fruit! (Enter the name of a fruit:)"
-  maybe_fruit = gets.chomp
-  reaction(maybe_fruit) 
+  begin
+    puts "Feed me a fruit! (Enter the name of a fruit:)"
+    maybe_fruit = gets.chomp
+    reaction(maybe_fruit) 
+    
+  rescue
+    puts "If you've given me some coffee you can try again"
+    retry if maybe_fruit == "coffee"
+    
+  end
+
+  
 end  
 
 # PHASE 4
@@ -49,4 +58,6 @@ class BestFriend
 end
 
 
-p convert_to_int(false)
+ convert_to_int(false)
+
+ feed_me_a_fruit
