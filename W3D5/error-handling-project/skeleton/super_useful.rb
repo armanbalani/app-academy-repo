@@ -1,6 +1,11 @@
 # PHASE 2
 def convert_to_int(str)
-  Integer(str)
+  begin
+    Integer(str)
+  rescue StandardError => e
+    return nil
+  end
+  
 end
 
 # PHASE 3
@@ -44,3 +49,4 @@ class BestFriend
 end
 
 
+p convert_to_int(false)
