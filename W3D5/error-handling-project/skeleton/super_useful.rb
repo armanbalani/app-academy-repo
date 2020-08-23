@@ -39,9 +39,14 @@ end
 # PHASE 4
 class BestFriend
   def initialize(name, yrs_known, fav_pastime)
+    begin
     @name = name
     @yrs_known = yrs_known
+    raise "Best friends must know each other for more than 5 years" if yrs_known < 5
     @fav_pastime = fav_pastime
+    rescue ArgumentError => e
+      raise "you left one empty!"
+    end
   end
 
   def talk_about_friendship
@@ -58,6 +63,6 @@ class BestFriend
 end
 
 
- convert_to_int(false)
+#  convert_to_int(false)
 
- feed_me_a_fruit
+#  feed_me_a_fruit
