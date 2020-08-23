@@ -45,24 +45,24 @@ class Manager < Employee
     end
 
 
-    def bonus
+    def bonus(multiplier)
         suboordinates = @assigned_employees
         total_sum = 0
         suboordinates.each do |suboordinate|
-            suboordinate.bonus if suboordinate.instance_of? Manager
-            total_sum += suboordinate.salary
+            if suboordinate.instance_of? Manager
+                result = suboordinate.bonus(multiplier)
+                total_sum += result
+            end
+            total_sum += suboordinate.salary * multiplier
         end
-        return total_sum
+        total_sum
     end
-
-
-
 end
 
 shawna = Employee.new("Shawna", "TA", 12000, "Darren")
 david = Employee.new("David", "TA", 10000, "Darren")
 darren = Manager.new("Darren", "TA Manager", 78000, "Ned")
 ned = Manager.new("Ned", "Founder", 1000000, nil)
-ned.assigned_employees
-darren.assigned_employees
-
+p ned.bonus(5)
+p darren.bonus(4)
+p david.bonus(3)
