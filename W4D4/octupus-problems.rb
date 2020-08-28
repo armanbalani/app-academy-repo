@@ -44,4 +44,26 @@ def merge(left_side, right_side)
     sorted + left_side + right_side
 end
 
-p clever_octopus(fish)
+tiles_array = ["up", "right-up", "right", "right-down", "down", "left-down", "left",  "left-up" ]
+
+def slow_dance(direction, array)
+    array.each.with_index do |ele, idx|
+        return idx if ele == direction
+    end
+end
+
+def create_hash(array)
+    hash = {}
+    array.each.with_index do |ele, idx|
+        hash[ele] = idx
+    end
+    hash
+end
+
+dance_hash = create_hash(tiles_array)
+
+def fast_dance(direction, hash)
+    hash[direction]
+end
+
+p fast_dance("left-up", dance_hash)
