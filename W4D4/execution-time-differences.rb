@@ -49,8 +49,6 @@ list = [2, 3, -6, 7, -6, 7, 3, 4, 5, 10, 7]
 def better_largest_contiguous_subsum(array)
     largest_sum = 0
     (0...array.length).each do |i|
-        x = i
-        until x == array.length
     end
 end
 
