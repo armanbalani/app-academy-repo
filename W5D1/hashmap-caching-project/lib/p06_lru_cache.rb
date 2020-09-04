@@ -14,6 +14,23 @@ class LRUCache
   end
 
   def get(key)
+    if @map.include?(key)
+      node = @map.get(key)
+      @store.remove(key)
+      node = @store.append(key, node.val)
+      @map.set(key, node)
+      return node.val
+    else
+      result = @prc.call(key)
+      node = @store.append(key, result)
+      @map.set(key, node)
+      if count > @max
+        first_node = @store[0]
+        @store.remove(first_node.key)
+        @map.delete(first_node.key)
+      end
+      return node.val
+    end
   end
 
   def to_s
