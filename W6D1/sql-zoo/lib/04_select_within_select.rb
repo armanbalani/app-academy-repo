@@ -66,7 +66,7 @@ def neighbors_of_certain_b_countries
   FROM
   countries
   WHERE
-  EXISTS (SELECT name FROM countries AS countries2 WHERE countries.continent = countries2.continent AND (name = 'Belize' OR name = 'Belgium'))
+  EXISTS (SELECT name FROM countries AS countries2 WHERE countries2.continent = countries.continent AND (name = 'Belize' OR name = 'Belgium'))
   SQL
 end
 
@@ -94,6 +94,6 @@ def sparse_continents
   FROM
   countries
   WHERE
-  continent NOT IN (SELECT continent FROM countries AS countries2 WHERE countries2.population >= 25000000)
+  continent = ALL (SELECT continent FROM countries AS countries2 WHERE countries2.continent = countries.continent AND countries.population < 25000000)
   SQL
 end
