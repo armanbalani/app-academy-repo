@@ -26,6 +26,27 @@ class Play
     Play.new(play[0])
   end
 
+  def self.find_by_playwright(name)
+    playwright_array = PlayDBConnection.instance.execute(<<-SQL, name)
+    SELECT
+    id
+    FROM
+    playwrights
+    WHERE
+    name = ?
+    SQL
+    playwright_id = playwright_array[0]["id"]
+    plays = PlayDBConnection.instance.execute(<<-SQL, playwright_id)
+    SELECT
+    *
+    FROM
+    plays
+    WHERE
+    playwright_id = ?
+    SQL
+    plays
+  end
+
   def self.all
     data = PlayDBConnection.instance.execute("SELECT * FROM plays")
     data.map { |datum| Play.new(datum) }
@@ -62,4 +83,4 @@ class Play
   end
 end
 
-p Play.find_by_title("All My Sons")
+p Play.find_by_playwright('Arthur Miller')
