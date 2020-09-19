@@ -44,7 +44,7 @@ class Play
     WHERE
     playwright_id = ?
     SQL
-    plays
+    plays.map { |datum| Play.new(datum) } 
   end
 
   def self.all
@@ -83,4 +83,6 @@ class Play
   end
 end
 
-p Play.find_by_playwright('Arthur Miller')
+
+
+ p Play.find_by_playwright('Arthur Miller')
