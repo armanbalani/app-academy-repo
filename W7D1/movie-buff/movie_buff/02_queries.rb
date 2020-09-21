@@ -2,6 +2,7 @@ def eighties_b_movies
   # List all the movies from 1980-1989 with scores falling between
   # 3 and 5 (inclusive).
   # Show the id, title, year, and score.
+  Movie.select("id, title, yr, score").where("score BETWEEN 3 AND 5 AND yr BETWEEN 1980 AND 1989")
 
 end
 
