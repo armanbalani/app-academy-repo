@@ -111,25 +111,31 @@ class MetaCorgiSnacks
     @box_id = box_id
   end
 
-  def method_missing(name, *args)
-    method_name = name.to_s
-    if method_name == "bone" || method_name == "kibble" || method_name == "treat"
-      info_method = ("get_" + method_name + "_info").to_sym
-      info = @snack_box.send(info_method, @box_id)
-      tastiness_method = ("get_" + method_name + "_tastiness").to_sym
-      tastiness = @snack_box.send(tastiness_method, @box_id)
-      result = "#{method_name.capitalize}: #{info}: #{tastiness} "
-      tastiness > 30 ? "* #{result}" : result
-    end
-    # Your code goes here...
-  end
+  # def method_missing(name, *args)
+  #   method_name = name.to_s
+  #   if method_name == "bone" || method_name == "kibble" || method_name == "treat"
+  #     info_method = ("get_" + method_name + "_info").to_sym
+  #     info = @snack_box.send(info_method, @box_id)
+  #     tastiness_method = ("get_" + method_name + "_tastiness").to_sym
+  #     tastiness = @snack_box.send(tastiness_method, @box_id)
+  #     result = "#{method_name.capitalize}: #{info}: #{tastiness} "
+  #     tastiness > 30 ? "* #{result}" : result
+  #   end
+  #   # Your code goes here...
+  # end
 
 
   def self.define_snack(name)
     # Your code goes here...
+    define_method(name.to_sym) do 
+      info_method = ("get_" + name + "_info").to_sym
+      info = @snack_box.send(info_method, @box_id)
+      tastiness_method = ("get_" + name + "_tastiness").to_sym
+      tastiness = @snack_box.send(tastiness_method, @box_id)
+      result = "#{name.capitalize}: #{info}: #{tastiness} "
+      tastiness > 30 ? "* #{result}" : result
+    end
   end
+
 end
 
-snackbox = SnackBox.new
-metasnacks = MetaCorgiSnacks.new(snackbox, 1)
-metasnacks.bone
