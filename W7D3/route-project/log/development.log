@@ -83,3 +83,203 @@ Processing by UsersController#index as */*
 Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/users?fav_food=pizza" for ::1 at 2020-09-25 15:42:43 +0530
+Processing by UsersController#index as */*
+  Parameters: {"fav_food"=>"pizza"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Completed 200 OK in 1ms (Views: 0.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2020-09-25 15:44:16 +0530
+Processing by UsersController#create as */*
+  Parameters: {"love"=>"wow"}
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 148ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2020-09-25 15:45:23 +0530
+Processing by UsersController#create as */*
+  Parameters: {"love"=>"wow"}
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/" for ::1 at 2020-09-25 15:46:40 +0530
+Processing by UsersController#create as */*
+  Parameters: {"love"=>"wow"}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/" for ::1 at 2020-09-25 15:46:48 +0530
+Processing by UsersController#index as */*
+  Parameters: {"love"=>"wow"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/" for ::1 at 2020-09-25 15:47:08 +0530
+Processing by UsersController#index as */*
+  Rendering text template
+  Rendered text template (0.0ms)
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/2" for ::1 at 2020-09-25 15:47:46 +0530
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"2"}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "//users?some_category[a_key]=another+value&some_category[a_second_key]=yet+another+value" for ::1 at 2020-09-25 15:50:25 +0530
+Processing by UsersController#create as */*
+  Parameters: {"love"=>{"app"=>"wow", "yay"=>"uhhuh", "wait"=>"wowowiwa"}, "irrelelant"=>"ahhhhhh", "some_category"=>{"a_key"=>"another value", "a_second_key"=>"yet another value"}}
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (19.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5921569912870162425)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20200925102743)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying)[0m
+  ↳ db/migrate/20200925102743_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (3.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200925102743"]]
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-09-25 10:31:39.593266"], ["updated_at", "2020-09-25 10:31:39.593266"]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5921569912870162425)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email") VALUES ($1, $2) RETURNING "id"[0m  [["name", "arman"], ["email", "arubalani@gmail.com"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email") VALUES ($1, $2) RETURNING "id"[0m  [["name", "uhuhuh"], ["email", "uhahaha@hotmao.com"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/users" for ::1 at 2020-09-25 16:04:57 +0530
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/armanbalani/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:3
+Completed 200 OK in 17ms (Views: 6.8ms | ActiveRecord: 7.2ms)
+
+
+Started POST "/users" for ::1 at 2020-09-25 16:09:14 +0530
+Processing by UsersController#create as */*
+  Parameters: {":user"=>{":name"=>"arumansakuman", ":email"=>"arumansakuman@gmail.com"}}
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/users_controller.rb:7:in `create'
+Started POST "/users" for ::1 at 2020-09-25 16:09:32 +0530
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{":name"=>"arumansakuman", ":email"=>"arumansakuman@gmail.com"}}
+Unpermitted parameters: ::name, ::email
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 422 Unprocessable Entity in 85ms (ActiveRecord: 9.9ms)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Name can't be blank, Email can't be blank):
+  
+app/controllers/users_controller.rb:9:in `create'
+Started POST "/users" for ::1 at 2020-09-25 16:09:41 +0530
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"arumansakuman", "email"=>"arumansakuman@gmail.com"}}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "email") VALUES ($1, $2) RETURNING "id"[0m  [["name", "arumansakuman"], ["email", "arumansakuman@gmail.com"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 200 OK in 8ms (Views: 0.3ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/users" for ::1 at 2020-09-25 16:09:53 +0530
+Processing by UsersController#index as */*
+  Parameters: {"user"=>{"name"=>"arumansakuman", "email"=>"arumansakuman@gmail.com"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:3
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/users" for ::1 at 2020-09-25 16:11:01 +0530
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"", "email"=>"arumansakuman@gmail.com"}}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:8
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:8
+Completed 422 Unprocessable Entity in 30ms (Views: 0.2ms | ActiveRecord: 18.9ms)
+
+
+Started POST "/users" for ::1 at 2020-09-25 16:11:14 +0530
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"hahahaha", "email"=>"fsdkfjsakjf"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email") VALUES ($1, $2) RETURNING "id"[0m  [["name", "hahahaha"], ["email", "fsdkfjsakjf"]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:8
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/users" for ::1 at 2020-09-25 16:11:19 +0530
+Processing by UsersController#index as */*
+  Parameters: {"user"=>{"name"=>"hahahaha", "email"=>"fsdkfjsakjf"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:3
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/2" for ::1 at 2020-09-25 16:12:22 +0530
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:16
+No template found for UsersController#show, rendering head :no_content
+Completed 204 No Content in 177ms (ActiveRecord: 13.9ms)
+
+
+Started GET "/users/2" for ::1 at 2020-09-25 16:12:48 +0530
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:16
+Completed 200 OK in 20ms (Views: 0.4ms | ActiveRecord: 11.2ms)
+
+
+Started GET "/users/3" for ::1 at 2020-09-25 16:12:52 +0530
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:16
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.5ms)
+
+
