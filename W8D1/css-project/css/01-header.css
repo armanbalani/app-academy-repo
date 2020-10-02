@@ -84,3 +84,11 @@ body {
 .item:hover .notification-list{
     display: block;
 }
+
+.item:hover .badge{
+    background: red;
+}
+
+.notification-item:hover {
+    background: #eee;
+}
