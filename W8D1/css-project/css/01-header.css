@@ -9,6 +9,7 @@ body {
 
 .header {
     background: red;
+    color: seashell;
 }
 
 .navbar {
@@ -20,6 +21,13 @@ body {
 
 .logo {
     float: left;
+    border-right: 1px solid #ccc;
+    font-weight: 700;
+}
+
+.header a {
+    display: block;
+    padding: 10px 20px;
 }
 
 .list {
@@ -34,4 +42,45 @@ body {
 
 .item {
     float: left;
+    border-left: 1px solid #ccc;
+    position: relative;
+}
+
+.logo:hover {
+    background: black;
+}
+
+.item:hover {
+    background: black;
+}
+
+.badge {
+    font-size: 14px;
+    background: black;
+    border-radius: 50%;
+    padding: 1px 6px;
+}
+
+.notification-list {
+    display:none;
+    position: absolute;
+    left: -1px;
+    font-size: 14px;
+    white-space: nowrap;
+    background: #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    overflow: hidden;
+}
+
+.notification-list li {
+    border-top: 1px solid #ccc;
+    color: #000;
+}
+
+.item:hover .notification-list{
+    display: block;
 }
