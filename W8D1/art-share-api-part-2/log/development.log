@@ -3646,3 +3646,151 @@ Processing by CommentsController#index as */*
 Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 0.6ms)
 
 
+Started GET "/users" for ::1 at 2020-10-02 18:41:42 +0530
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/armanbalani/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#index as */*
+  [1m[36mUser Load (19.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:3
+Completed 200 OK in 48ms (Views: 6.2ms | ActiveRecord: 31.7ms)
+
+
+Started GET "/users?query=aru" for ::1 at 2020-10-02 18:46:48 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"aru"}
+  [1m[36mUser Load (4.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE '%'aru'')[0m
+  ↳ app/controllers/users_controller.rb:5
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 4.7ms)
+
+
+
+ActiveRecord::StatementInvalid - PG::SyntaxError: ERROR:  syntax error at or near "aru"
+LINE 1: SELECT "users".* FROM "users" WHERE (username LIKE '%'aru'')
+                                                              ^
+: SELECT "users".* FROM "users" WHERE (username LIKE '%'aru''):
+  app/controllers/users_controller.rb:5:in `index'
+
+Started GET "/users?query=aru" for ::1 at 2020-10-02 18:47:13 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"aru"}
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE %'aru')[0m
+  ↳ app/controllers/users_controller.rb:5
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 1.8ms)
+
+
+
+ActiveRecord::StatementInvalid - PG::SyntaxError: ERROR:  syntax error at or near "%"
+LINE 1: SELECT "users".* FROM "users" WHERE (username LIKE %'aru')
+                                                           ^
+: SELECT "users".* FROM "users" WHERE (username LIKE %'aru'):
+  app/controllers/users_controller.rb:5:in `index'
+
+Started GET "/users?query=aru" for ::1 at 2020-10-02 18:47:32 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"aru"}
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE '%'aru'')[0m
+  ↳ app/controllers/users_controller.rb:5
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 1.8ms)
+
+
+
+ActiveRecord::StatementInvalid - PG::SyntaxError: ERROR:  syntax error at or near "aru"
+LINE 1: SELECT "users".* FROM "users" WHERE (username LIKE '%'aru'')
+                                                              ^
+: SELECT "users".* FROM "users" WHERE (username LIKE '%'aru''):
+  app/controllers/users_controller.rb:5:in `index'
+
+Started GET "/users?query=aru" for ::1 at 2020-10-02 18:48:18 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"aru"}
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE '%aru')[0m
+  ↳ app/controllers/users_controller.rb:6
+Completed 200 OK in 18ms (Views: 1.3ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/users?query=aru" for ::1 at 2020-10-02 18:48:41 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"aru"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE 'aru%')[0m
+  ↳ app/controllers/users_controller.rb:6
+Completed 200 OK in 21ms (Views: 4.5ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/users?query=aru" for ::1 at 2020-10-02 18:48:54 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"aru"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE '%aru%')[0m
+  ↳ app/controllers/users_controller.rb:6
+Completed 200 OK in 22ms (Views: 4.2ms | ActiveRecord: 9.4ms)
+
+
+Started GET "/users?query=rum" for ::1 at 2020-10-02 18:49:00 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"rum"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE '%rum%')[0m
+  ↳ app/controllers/users_controller.rb:6
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users?query=bob" for ::1 at 2020-10-02 18:49:08 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"bob"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE '%bob%')[0m
+  ↳ app/controllers/users_controller.rb:6
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users?query=bo" for ::1 at 2020-10-02 18:49:12 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"bo"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE '%bo%')[0m
+  ↳ app/controllers/users_controller.rb:6
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users" for ::1 at 2020-10-02 18:49:17 +0530
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users?query=Bob" for ::1 at 2020-10-02 18:49:27 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"Bob"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE '%Bob%')[0m
+  ↳ app/controllers/users_controller.rb:6
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users?query=bby" for ::1 at 2020-10-02 18:49:32 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"bby"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE '%bby%')[0m
+  ↳ app/controllers/users_controller.rb:6
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/users?query=Van" for ::1 at 2020-10-02 18:49:50 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"Van"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE '%Van%')[0m
+  ↳ app/controllers/users_controller.rb:6
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users" for ::1 at 2020-10-02 18:49:54 +0530
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users?query=Da" for ::1 at 2020-10-02 18:50:09 +0530
+Processing by UsersController#index as */*
+  Parameters: {"query"=>"Da"}
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (username LIKE '%Da%')[0m
+  ↳ app/controllers/users_controller.rb:6
+Completed 200 OK in 5ms (Views: 1.4ms | ActiveRecord: 2.6ms)
+
+
