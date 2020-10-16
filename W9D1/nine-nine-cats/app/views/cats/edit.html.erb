@@ -1,0 +1,28 @@
+  <h1>Edit cat</h1>
+
+  <form action=<%= cat_url(@cat) %> method="post">
+    <input type="hidden" name="_method" value="PATCH">
+    <label for="name">name</label>
+    <input id="name" type="text" name="cat[name]" value="<%= @cat.name %>">
+    <br>
+    <label for="color">color</label>
+    <select name="cat[color]" id="color">
+        <option value="" disabled hidden>-- select a color --</option>
+        <% Cat::CATS.each do |color| %>
+        <option value="<%= color %>" <%= @cat.color == color ? "selected" : "" %>><%= color.capitalize %></option>
+        <% end %>
+    </select>
+    <br>
+    <label for="male">Male</label>
+    <input type="radio" id="male" name=cat[sex] value="M" <%= @cat.sex == "M" ? "checked='checked'" : "" %>>
+    <label for="female">Female</label>
+    <input type="radio" id="female" name=cat[sex] value="F" <%= @cat.sex == "F" ? "checked='checked'" : "" %>>
+    <br>
+    <label for="birthdate">birthdate</label>
+    <input type="date" name="cat[birth_date]" id="birthdate" value=<%= @cat.birth_date %>>
+    <br>
+    <label for="description">description</label>
+    <textarea name="cat[description]" id="description" cols="30" rows="10"><%= @cat.description %></textarea>
+    <br>
+    <input type="submit" value="Submit This Form">
+  </form>
