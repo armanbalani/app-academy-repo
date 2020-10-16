@@ -1,0 +1,25 @@
+  <form action="/cats" method="post">
+    <label for="name">name</label>
+    <input id="name" type="text" name="cat[name]">
+    <br>
+    <label for="color">color</label>
+    <select name="cat[color]" id="color">
+        <option value="" selected disabled hidden>-- select a color --</option>
+        <% Cat::CATS.each do |color| %>
+        <option value=<%= color %>><%= color.capitalize %></option>
+        <% end %>
+    </select>
+    <br>
+    <label for="male">Male</label>
+    <input type="radio" id="male" name=cat[sex] value="M">
+    <label for="female">Female</label>
+    <input type="radio" id="female" name=cat[sex] value="F">
+    <br>
+    <label for="birthdate">birthdate</label>
+    <input type="date" name="cat[birth_date" id="birthdate">
+    <br>
+    <label for="description">description</label>
+    <textarea name="cat[description]" id="description" cols="30" rows="10"></textarea>
+    <br>
+    <input type="submit" value="Submit This Form">
+  </form>
