@@ -4,6 +4,8 @@ class Cat < ApplicationRecord
     include ActionView::Helpers::DateHelper
 
     CATS = ["white", "black", "orange", "brown", "grey", "Calico"]
+
+    has_many :cat_rental_requests
     
     validates :name, presence: true
     validates :color, presence: true
