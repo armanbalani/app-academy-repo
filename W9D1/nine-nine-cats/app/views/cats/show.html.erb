@@ -31,7 +31,7 @@
 <h3>Rental Requests For <%= @cat.name %></h3>
 <ul>
     <% @requests.each do |request| %>
-    <li><%= request.start_date %> to <%= request.end_date %>, <%= request.status %></li>
+    <li><%= request.start_date %> to <%= request.end_date %>, <%= request.status %><%= button_to "Approve", approve_cat_rental_request_url(request) %> <%= button_to "Deny", deny_cat_rental_request_url(request) %></li>
     <% end %>
 </ul>
 
