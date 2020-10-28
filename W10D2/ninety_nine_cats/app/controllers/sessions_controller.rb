@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+
+  before_action :already_signed_in!, only: [:new, :create]
+
   def new
     render :new
   end
@@ -9,7 +12,7 @@ class SessionsController < ApplicationController
     user = User.find_by_credentials(user_name, password)
     if !user.nil?
       user.reset_session_token!
-      session[:session_token] = user.session_token
+      login!(user)
       redirect_to cats_url
     else
       render json: "credentials be wrong fam"
@@ -17,5 +20,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    logout!
+    redirect_to cats_url
   end
 end

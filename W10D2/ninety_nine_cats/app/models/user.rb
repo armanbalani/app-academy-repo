@@ -2,6 +2,7 @@ class User < ApplicationRecord
 
     attr_reader :password
 
+
     validates :user_name, presence: true
     validates :session_token, presence: true
     validates :password_digest, presence: { message: "Password cannot be blank" }
